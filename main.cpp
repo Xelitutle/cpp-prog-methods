@@ -87,6 +87,11 @@ namespace task_1_1_4
   }
 }
 
+namespace task_1_1_5
+{
+  
+}
+
 int main()
 {
   task_1_1_4::all_tests();
