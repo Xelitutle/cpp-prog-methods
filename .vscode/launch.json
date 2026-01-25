@@ -10,7 +10,7 @@
         "request": "launch",
         "program": "${workspaceFolder}/build/target_build/Debug/cpp-prog-methods.exe",
         "args": [],
-        "stopAtEntry": true,
+        "stopAtEntry": false,
         "cwd": "${fileDirname}",
         "environment": []
     }
