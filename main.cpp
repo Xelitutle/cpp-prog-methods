@@ -262,8 +262,10 @@ namespace task_1_1_9
   {
     if (x > a)
     {
-      if (x < b) return 0;
-      else return 1;
+      if (x < b) 
+        return 0;
+      else 
+        return 1;
     }
     else return -1;
   }
@@ -275,7 +277,7 @@ namespace task_1_1_9
       printf("Test %d: PASS\n", test_num);
     }
     else {
-      printf("Test %d: FAIL! find_max(%lf, %lf, %lf) = %d, expected %d\n",
+      printf("Test %d: FAIL! check_range(%lf, %lf, %lf) = %d, expected %d\n",
         test_num, a, b, x, value, expected);
     }
   }
@@ -294,12 +296,336 @@ namespace task_1_1_9
 
 namespace task_1_1_10
 {
-  int check_range()
+  using namespace task_1_1_9;
+  
+  int check_two_range(double num)
+  {
+    return (check_range(1.0, 11.0, num) == 0) || (check_range(101.0, 1001.0, num) == 0 );
+  }
+
+  void test(double x, int expected, int test_num)
+  {
+    int value = check_two_range(x);
+    if (value == expected) {
+      printf("Test %d: PASS\n", test_num);
+    }
+    else {
+      printf("Test %d: FAIL! find_max(%lf) = %d, expected %d\n",
+        test_num, x, value, expected);
+    }
+  }
+
+  void all_tests()
+  {
+    test(0.0, 0, 1);
+    test(1.1, 1, 2);
+    test(2.0, 1, 3);
+    test(10.9, 1, 4);
+    test(12.0, 0, 5);
+    test(102.0, 1, 6);
+    test(1002.0, 0, 7);
+  }
+}
+
+
+namespace task_1_1_11
+{
+  /*
+  Задание 1-1-11
+  Проверьте, принадлежит ли число x объединению и/или пересечению отрезков [a1, b1], [a2, b2].
+  */
+
+  int check_two_range(double a1, double b1, double a2, double b2, double num)
+  {
+    using namespace task_1_1_9;
+    return (check_range(a1, b1, num) == 0) || (check_range(a2, b2, num) == 0 );
+  }
+
+  void test(double a1, double b1, double a2, double b2, double x, int expected, int test_num)
+  {
+    int value = check_two_range(a1, b1, a2, b2, x);
+    if (value == expected) {
+      printf("Test %d: PASS\n", test_num);
+    }
+    else {
+      printf("Test %d: FAIL! check_two_range(%lf, %lf, %lf, %lf, %lf) = %d, expected %d\n",
+        test_num, a1, b1, a2, b2, x, value, expected);
+    }
+  }
+
+  void all_tests()
+  {
+    test(1.0, 11.0, 101.0, 1001.0, 0.0, 0, 1);
+    test(1.0, 11.0, 101.0, 1001.0, 1.1, 1, 2);
+    test(1.0, 11.0, 101.0, 1001.0, 2.0, 1, 3);
+    test(1.0, 11.0, 101.0, 1001.0, 10.9, 1, 4);
+    test(1.0, 11.0, 101.0, 1001.0, 12.0, 0, 5);
+    test(1.0, 11.0, 101.0, 1001.0, 102.0, 1, 6);
+    test(1.0, 11.0, 101.0, 1001.0, 1002.0, 0, 7);
+  }
+}
+
+
+namespace task_1_1_12
+{
+  /*
+  Задача 1-1-12.
+  Проверьте, принадлежит ли число x интервалам (a1, b1), (a2, b2), (a3, b3), 
+  и если принадлежит, то укажите номер каждого такого интервала.
+  */
+
+  int check_two_range(
+    double a1, double b1, 
+    double a2, double b2, 
+    double a3, double b3,
+    double num)
+  {
+    using namespace task_1_1_9;
+    return (check_range(a1, b1, num) == 0) || (check_range(a2, b2, num) == 0 ) || (check_range(a3, b3, num) == 0);
+  }
+
+  void test(double a1, double b1, double a2, double b2, double a3, double b3, double x, int expected, int test_num)
+  {
+    int value = check_two_range(a1, b1, a2, b2, a3, b3, x);
+    if (value == expected) {
+      printf("Test %d: PASS\n", test_num);
+    }
+    else {
+      printf("Test %d: FAIL! check_two_range(%lf, %lf, %lf, %lf, %lf, %lf, %lf) = %d, expected %d\n",
+        test_num, a1, b1, a2, b2, a3, b3, x, value, expected);
+    }
+  }
+
+  void all_tests()
+  {
+    test(1.0, 11.0, 101.0, 1001.0, -10.0, -5.0, 0.0, 0, 1);
+    test(1.0, 11.0, 101.0, 1001.0, -10.0, -5.0, 1.1, 1, 2);
+    test(1.0, 11.0, 101.0, 1001.0, -10.0, -5.0, 2.0, 1, 3);
+    test(1.0, 11.0, 101.0, 1001.0, -10.0, -5.0, 10.9, 1, 4);
+    test(1.0, 11.0, 101.0, 1001.0, -10.0, -5.0, 12.0, 0, 5);
+    test(1.0, 11.0, 101.0, 1001.0, -10.0, -5.0, 102.0, 1, 6);
+    test(1.0, 11.0, 101.0, 1001.0, -10.0, -5.0, 1002.0, 0, 7);
+    test(1.0, 11.0, 101.0, 1001.0, -10.0, -5.0, -7.0, 1, 8);
+    test(1.0, 11.0, 101.0, 1001.0, -10.0, -5.0, -11.0, 0, 9);
+    test(1.0, 11.0, 101.0, 1001.0, -10.0, -5.0, -4.0, 0, 10);
+  }
+}
+
+
+namespace task_1_1_13
+{
+  /*
+  Задача 1-1-13.
+  Вычислите |a| + |b|, ||a| - |b||, ||a + b| - |a - b||
+  */
+
+  double abs_sum(double a, double b)
+  {
+    return fabs(a) + fabs(b);
+  }
+
+  double abs_sub(double a, double b)
+  {
+    return fabs(fabs(a) - fabs(b));
+  }
+
+  double abs_expr(double a, double b)
+  {
+    return fabs(fabs(a + b) - fabs(a - b));
+  }
+
+  void test(double a, double b, double exp_sum, double exp_sub, double exp_expr, double eps, int test_num)
+  {
+    double value = abs_sum(a, b);
+    if (fabs(value - exp_sum) < eps) {
+      printf("Test %d.1: PASS\n", test_num);
+    }
+    else {
+      printf("Test %d.1: FAIL! abs_sum(%lf, %lf) = %lf, expected %lf\n",
+        test_num, a, b, value, exp_sum);
+    }
+
+    value = abs_sub(a, b);
+    if (fabs(value - exp_sub) < eps) {
+      printf("Test %d.2: PASS\n", test_num);
+    }
+    else {
+      printf("Test %d.2: FAIL! abs_sub(%lf, %lf) = %lf, expected %lf\n",
+        test_num, a, b, value, exp_sub);
+    }
+
+    value = abs_expr(a, b);
+    if (fabs(value - exp_expr) < eps) {
+      printf("Test %d.3: PASS\n", test_num);
+    }
+    else {
+      printf("Test %d.3: FAIL! abs_expr(%lf, %lf) = %lf, expected %lf\n",
+        test_num, a, b, value, exp_expr);
+    }
+  }
+
+  void all_tests()
+  {
+    test(1.0, -1.0, 2.0, 0.0, 2.0, 1e-10, 1);
+    test(-1.0, 1.0, 2.0, 0.0, 2.0, 1e-10, 2);
+    test(2.0, -1.0, 3.0, 1.0, 2.0, 1e-10, 3);
+  }
+}
+
+
+namespace task_1_1_14
+{
+  /*
+  Задача 1-1-14.
+  Замените содержимое a на значение a + b, содержимое b на значение a − b без использования дополнительных переменных.
+  */
+
+  void swap(int& a, int& b)
+  {
+    a = a + b;
+    b = a - b - b;
+  }
+
+  void test(int a, int b, int exp_sum, int exp_sub, int test_num)
+  {
+    int _a = a;
+    int _b = b;
+    swap(_a, _b);
+    if (_a == exp_sum && _b == exp_sub) {
+      printf("Test %d: PASS\n", test_num);
+    }
+    else {
+      printf("Test %d: FAIL! swap(%d, %d) = %d, %d, expected %d, %d\n",
+        test_num, a, b, _a, _b, exp_sum, exp_sub);
+    }
+  }
+
+  void all_tests()
+  {
+    test(1, 2, 3, -1, 1);
+    test(-1, 2, 1, -3, 2);
+    test(1, -2, -1, 3, 3);
+    test(-1, -2, -3, 1, 4);
+  }
+}
+
+
+namespace task_1_1_15
+{
+  /*
+  Задача 1-1-15.
+  Поменяйте содержимое a и b местами без использования дополнительных переменных.
+  */
+
+  void swap(int& a, int& b)
+  {
+    a = a + b;
+    b = a - b;
+    a = a - b;
+  }
+
+  void test(int a, int b, int exp_sum, int exp_sub, int test_num)
+  {
+    int _a = a;
+    int _b = b;
+    swap(_a, _b);
+    if (_a == exp_sum && _b == exp_sub) {
+      printf("Test %d: PASS\n", test_num);
+    }
+    else {
+      printf("Test %d: FAIL! swap(%d, %d) = %d, %d, expected %d, %d\n",
+        test_num, a, b, _a, _b, exp_sum, exp_sub);
+    }
+  }
+
+  void all_tests()
+  {
+    test(1, 2, 2, 1, 1);
+    test(10, 20, 20, 10, 2);
+    test(-1, -2, -2, -1, 3);
+  }
+}
+
+
+namespace task_1_1_16
+{
+  /*
+  Задача 1-1-16.
+  Поменяйте содержимое a и b местами без использования дополнительных переменных.
+  */
+
+  int sum(int n)
+  {
+    int s = 0;
+    for (int i = 0; i <= n; ++i)
+      s += i;
+
+    return s;
+  }
+
+  void test(int x, int test_num)
+  {
+    int value = sum(x);
+    int exp = (x * (x + 1) / 2);
+    if (value == exp) {
+      printf("Test %d: PASS\n", test_num);
+    }
+    else {
+      printf("Test %d: FAIL! sum(%d) = %d, expected %d\n",
+        test_num, x, value, exp);
+    }
+  }
+
+  void all_tests()
+  {
+    test(1, 1);
+    test(2, 2);
+    test(3, 3);
+    test(4, 4);
+  }
+}
+
+
+namespace task_1_1_17
+{
+  /*
+  Задача 1-1-17.
+  Найдите величину n! = 1 · 2 · . . . · n.
+  */
+
+  unsigned long long fact(unsigned long long n)
+  {
+    unsigned long long s = 1;
+    for (unsigned long long i = 1; i <= n; ++i)
+      s *= i;
+
+    return s;
+  }
+
+  void test(unsigned long long x, unsigned long long exp, int test_num)
+  {
+    unsigned long long value = fact(x);
+    if (value == exp) {
+      printf("Test %d: PASS\n", test_num);
+    }
+    else {
+      printf("Test %d: FAIL! fact(%llu) = %llu, expected %llu\n",
+        test_num, x, value, exp);
+    }
+  }
+
+  void all_tests()
+  {
+    test(1, 1, 1);
+    test(2, 2, 2);
+    test(3, 6, 3);
+    test(4, 24, 4);
+  }
 }
 
 
 int main()
 {
-  task_1_1_9::all_tests();
+  task_1_1_17::all_tests();
   return 0;
 }
