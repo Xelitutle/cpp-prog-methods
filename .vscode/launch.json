@@ -12,7 +12,8 @@
         "args": [],
         "stopAtEntry": false,
         "cwd": "${fileDirname}",
-        "environment": []
+        "environment": [],
+        "console": "externalTerminal"
     }
     ]
 }

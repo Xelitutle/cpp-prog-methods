@@ -624,8 +624,151 @@ namespace task_1_1_17
 }
 
 
+namespace task_1_1_21
+{
+  /*
+  Задача 1-1-21.
+  Реализуйте «калькулятор» для выполнения базовых действий с целыми числами
+  */
+
+  void print_menu()
+  {
+    printf(
+      "For use enter operation code\n" \
+      "  0) Print menu;\n" \
+      "  1) a + b;\n" \
+      "  2) a - b;\n" \
+      "  3) a * b;\n" \
+      "  4) a / b;\n" \
+      "  5) a ^ b;\n" \
+      "  6) a %% b;\n"
+    );
+  }
+
+  bool read_values(int& a, int& b)
+  {
+    printf("Enter a and b by space: ");
+    return (2 == scanf("%d%d", &a, &b));
+  }
+
+  void calculator()
+  {
+    bool f_work = true;
+    int code = 0;
+
+    print_menu();
+
+    while (f_work)
+    {
+      printf("Enter code: ");
+      scanf("%d", &code);
+
+      if (code == 0) print_menu();
+      else if (code <= 6)
+      {
+        int a = 0, b = 0;
+        if (!read_values(a, b))
+          printf("Read error!\n");
+        else{
+          switch (code)
+          {
+            case 1: printf("%d + %d = %d\n", a, b, a + b); break;
+            case 2: printf("%d - %d = %d\n", a, b, a - b); break;
+            case 3: printf("%d * %d = %d\n", a, b, a * b); break;
+            case 4: printf("%d / %d = %d\n", a, b, a / b); break;
+            case 5: printf("%d ^ %d = %d\n", a, b, static_cast<int>(pow(a, b))); break;
+            case 6: printf("%d %% %d = %d\n", a, b, a % b); break;
+            default: printf("Error!\n"); break;
+          }
+        }
+      }
+      else 
+        break;
+    }
+  }
+}
+
+
+namespace task_1_1_22
+{
+  /*
+  Задача 1-1-22.
+  По заданным параметрам изображений ыведите на экран псевдографические картинки.
+  */
+
+  /// @brief Нарисовать прямоугольник
+  /// @param a Количество строк
+  /// @param b Количество столбцов
+  void print_rect(unsigned a, unsigned b)
+  {
+    if (a > 20 || b > 20) 
+      printf("Error params!");
+    else
+    {
+      for (unsigned i = 0; i < a; ++i)
+      {
+        for (unsigned j = 0; j < b; ++j)
+          printf("*");
+        printf("\n");
+      }
+      printf("\n");
+    }
+  }
+
+  /// @brief Нарисовать прямоугольный треугольник
+  /// @param h Высота
+  void print_top_triangle(unsigned h)
+  {
+    if (h > 20)
+      printf("Error params!");
+    else
+    {
+      for (unsigned i = 1; i <= h; ++i)
+      {
+        for (unsigned j = 0; j < i; ++j)
+          printf("*");
+        printf("\n");
+      }
+    printf("\n");
+    }
+  }
+
+  /// @brief Нарисовать перевернутый прямоугольный треугольник
+  /// @param h Высота треугольника
+  void print_bottom_triangle(unsigned h)
+  {
+    if (h > 20)
+      printf("Error params!");
+    else
+    {
+      for (unsigned i = h; i > 0; --i)
+      {
+        for (unsigned k = 0; k < (h - i); k++)
+          printf(" ");
+        for (unsigned j = 0; j < i; ++j)
+          printf("*");
+        printf("\n");
+      }
+      printf("\n");
+    }
+  }
+
+  void print_tree(unsigned b)
+  {
+    
+  }
+
+  void all_tests()
+  {
+    print_rect(5, 8);
+    print_top_triangle(5);
+    print_bottom_triangle(5);
+  }
+}
+
+
 int main()
 {
-  task_1_1_17::all_tests();
+  task_1_1_22::all_tests();
   return 0;
 }
