@@ -711,7 +711,6 @@ namespace task_1_1_22
           printf("*");
         printf("\n");
       }
-      printf("\n");
     }
   }
 
@@ -729,7 +728,6 @@ namespace task_1_1_22
           printf("*");
         printf("\n");
       }
-    printf("\n");
     }
   }
 
@@ -749,20 +747,131 @@ namespace task_1_1_22
           printf("*");
         printf("\n");
       }
-      printf("\n");
     }
   }
 
+  /// @brief Нарисовать треугольник
+  /// @param b Высота
+  /// @param ofs Сдвиг влево
+  void print_triangle(unsigned h, unsigned ofs=0)
+  {
+    if (h > 20)
+      printf("Error params!");
+    else
+    {
+      unsigned star_cnt = 1;
+      for (unsigned i = 0; i < h; ++i)
+      {
+        unsigned space_cnt = h - i - 1 + ofs;
+        for (unsigned j = 0; j < space_cnt; ++j)
+          printf(" ");
+        for (unsigned j = 0; j < star_cnt; ++j)
+          printf("*");
+        star_cnt += 2;
+        printf("\n");
+      }
+    }
+  }
+
+  /// @brief Нарисовать елку
+  /// @param b Количество блоков (треугольников)
   void print_tree(unsigned b)
   {
-    
+    if (b > 20)
+      printf("Error params!");
+    else
+    {
+      for (unsigned i = 0; i < b; ++i)
+      {
+        print_triangle(i + 2, b - i - 1);
+      }
+    }
+  }
+
+  /// @brief Нарисовать треугольник вправо
+  /// @param h Высота
+  void print_triangle_right(unsigned h)
+  {
+    if (h > 20 || h % 2 == 0)
+      printf("Error params!");
+    else
+    {
+      print_top_triangle(h);
+      for (unsigned i = h - 1; i > 0; --i)
+      {
+        for (unsigned j = 0; j < i; ++j)
+          printf("*");
+        printf("\n");
+      }
+    }
+  }
+
+  /// @brief Нарисовать параллелепипед
+  /// @param h Высота
+  void print_par(unsigned h)
+  {
+    if (h > 20 || h % 2 == 0)
+      printf("Error params!");
+    else
+    {
+      print_top_triangle(h);
+      for (unsigned i = h - 1; i > 0; --i)
+      {
+        for (unsigned k = 0; k < h - i; ++k)
+          printf(" ");
+        for (unsigned j = 0; j < i; ++j)
+          printf("*");
+        printf("\n");
+      }
+    }
+  }
+
+  /// @brief Нарисовать линию сверху-вниз
+  /// @param h Высота
+  void print_top_down(unsigned h)
+  {
+    if (h > 20)
+      printf("Error params!");
+    else
+    {
+      for (unsigned i = 0; i < h; ++i)
+      {
+        for (unsigned j = 0; j < i; ++j)
+          printf(" ");
+        printf("*\n");
+      }
+    }
+  }
+
+  /// @brief Нарисовать линию снизу-вверх
+  /// @param h Высота
+  void print_down_top(unsigned h)
+  {
+    if (h > 20)
+      printf("Error params!");
+    else
+    {
+      for (unsigned i = h-1; i > 0; --i)
+      {
+        for (unsigned j = 0; j < i * 2; ++j)
+          printf(" ");
+        printf("*\n");
+      }
+      printf("*\n");
+    }
   }
 
   void all_tests()
   {
-    print_rect(5, 8);
-    print_top_triangle(5);
-    print_bottom_triangle(5);
+    print_rect(5, 8); printf("\n");
+    print_top_triangle(5); printf("\n");
+    print_bottom_triangle(5); printf("\n");
+    print_triangle(5); printf("\n");
+    print_tree(5); printf("\n");
+    print_triangle_right(5); printf("\n");
+    print_par(3); printf("\n");
+    print_top_down(5); printf("\n");
+    print_down_top(5); printf("\n");
   }
 }
 
